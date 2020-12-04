@@ -1,0 +1,325 @@
+<div class="container">
+
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="formxD">
+    Información de Registro
+
+    <br>
+    <br>
+    <p>
+      <mat-form-field
+        appearance="standard"
+        class="formItem"
+        style="text-align: center"
+      >
+        <mat-label>Nombre</mat-label>
+        <input
+          formControlName="nombre"
+          type="text"
+          matInput
+          placeholder="Nombre{p.ej. Juan, José, Maria}"
+          required
+        />
+        <mat-hint *ngIf="this.registerForm.get('nombre').invalid" style="color: red;">&nbsp; Este campo es obligatorio</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" class="formItem">
+        <mat-label>Apellido</mat-label>
+        <input
+          formControlName="apellido"
+          type="text"
+          matInput
+          placeholder="{p.ej. Rey, Reyes, Zapata}"
+          required
+        />
+        <mat-hint *ngIf="this.registerForm.get('apellido').invalid" style="color: red;">&nbsp; Este campo es obligatorio</mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="standard" class="formItem">
+        <mat-label>Cédula Ciudadanía</mat-label>
+        <input
+          formControlName="cc"
+          class="numberCc"
+          type="number"
+          matInput
+          placeholder="Cedula{p.ej. 1098457869}"
+          required
+          (change)=validarCC()
+        />
+        <mat-hint *ngIf="this.registerForm.get('cc').invalid" style="color: red;">&nbsp;Este campo es obligatorio</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field
+        appearance="standard"
+        class="formItem"
+        style="text-align: center"
+      >
+        <mat-label>E-mail</mat-label>
+        <input
+          formControlName="email"
+          type="email"
+          matInput
+          placeholder="email personxx@hotmail.com"
+          required
+          (change)=validarMail()
+        />
+        <mat-hint *ngIf="this.registerForm.get('email').hasError('required'); else error2" style="color: red;">&nbsp;Este campo es obligatorio</mat-hint>
+        <ng-template #error2><mat-hint *ngIf="this.registerForm.get('email').hasError('email') && this.registerForm.get('email').touched" style="color: red;">&nbsp;Por favor digita un correo valido</mat-hint></ng-template>
+      </mat-form-field>
+
+    </p>
+    <p>
+
+      <mat-form-field appearance="standard" class="formItem1">
+          <mat-label>Fecha de nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaN" required />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-hint *ngIf="this.registerForm.get('fechaN').invalid" style="color: red;">Este campo es obligatorio</mat-hint>
+      </mat-form-field>
+
+    </p>
+    <p>
+
+
+      <mat-form-field appearance="standard" class="formItem">
+        <mat-label>Dirección</mat-label>
+        <input
+          formControlName="direccion"
+          type="text"
+          matInput
+          placeholder="Dirección{cra 3 # 12-68}"
+          required
+        />
+        <mat-hint *ngIf="this.registerForm.get('direccion').invalid" style="color: red;">&nbsp;Este campo es obligatorio</mat-hint>
+      </mat-form-field>
+
+
+<mat-form-field
+    appearance="standard"
+    class="formItem"
+    style="text-align: center"
+  >
+    <mat-label>Ciudad</mat-label>
+    <input type="text"
+    placeholder="Tu ciudad"
+    matInput
+    formControlName="ciudad"
+    [matAutocomplete]="autoC">
+    <mat-autocomplete #autoC="matAutocomplete">
+    <mat-option *ngFor="let option of opcionesFiltradasCiudad | async" [value]="option.municipio">
+      {{option.municipio}}
+    </mat-option>
+</mat-autocomplete>
+<mat-hint *ngIf="this.registerForm.get('ciudad').invalid" style="color: red;">&nbsp;Este campo es obligatorio</mat-hint>
+</mat-form-field>
+
+
+</p>
+<p>
+
+
+  <mat-form-field
+  appearance="standard"
+  class="formItem"
+  style="text-align: center"
+>
+  <mat-label>Departamento</mat-label>
+  <input type="text"
+  placeholder="Tu departamento"
+  matInput
+  formControlName="dept"
+  [matAutocomplete]="autoD">
+  <mat-autocomplete #autoD="matAutocomplete">
+  <mat-option *ngFor="let option of opcionesFiltradas | async" [value]="option.departamento">
+    {{option.departamento}}
+  </mat-option>
+</mat-autocomplete>
+<mat-hint *ngIf="this.registerForm.get('dept').invalid" style="color: red;">&nbsp;Este campo es obligatorio</mat-hint>
+</mat-form-field>
+
+      <!-- <mat-form-field appearance="fill" class="formItem">
+        <mat-label>Ciudad</mat-label>
+        <mat-select
+      formControlName="ciudad"
+      matInput
+      required>
+      <mat-option [disabled]="true">Tu ciudad</mat-option>
+      <mat-option *ngFor="let state of datos" [value]="state.municipio">{{state.municipio}}</mat-option>
+    </mat-select>
+    <mat-hint></mat-hint>
+    </mat-form-field>-->
+
+     <mat-form-field appearance="standard" class="formItem">
+      <mat-label>País</mat-label>
+      <input
+        formControlName="pais"
+        type="text"
+        matInput
+        placeholder="País {Indonesia, Colombia}"
+        required
+      />
+      <mat-hint *ngIf="this.registerForm.get('pais').invalid" style="color: red;">&nbsp;Este campo es obligatorio</mat-hint>
+    </mat-form-field>
+
+
+   <!--<mat-form-field
+    appearance="fill"
+    class="formItem"
+    style="text-align: center"
+  >
+    <mat-label>Departamento</mat-label>
+    <mat-select
+    formControlName="dept"
+    matInput
+    required>
+      <mat-option [disabled]="true">Tu departamento</mat-option>
+      <mat-option *ngFor="let state of datos" [value]="state.departamento">{{state.departamento}}</mat-option>
+    </mat-select>
+    <mat-hint></mat-hint>
+  </mat-form-field>-->
+</p>
+
+
+
+<!--<div class="card-body">
+  <div class="habilidades" style="margin: auto; display: block; width: 200px; padding-left: 25px; padding-right: 20px;">
+    <br>
+    <mat-label>Ciudad</mat-label>
+    <hr>
+
+  <ng-autocomplete
+    matInput
+    formControlName="ciudad"
+    style="color: black;"
+    [data]="ciudades"
+    [searchKeyword]="'municipio'"
+    [itemTemplate]="itemTemplate2"
+    [notFoundTemplate]="notFoundTemplate"
+    [disabled]="valCity" >
+  </ng-autocomplete>
+
+  <ng-template #itemTemplate2 let-item  >
+  <a style="color: black;" [innerHTML]="item.municipio" ></a>
+  </ng-template>
+
+  <ng-template #notFoundTemplate let-notFound>
+  <div style="color: black;" [innerHTML]="notFound"></div>
+  </ng-template>
+  <mat-hint></mat-hint>
+  <br>
+</div>
+</div>-->
+
+
+
+
+
+  <p>
+
+      <mat-form-field appearance="standard" class="formItem">
+        <mat-label>Postal</mat-label>
+        <input
+          formControlName="postal"
+          type="number"
+          matInput
+          placeholder="Postal{p.ej. 13425}"
+          required
+        />
+        <mat-hint *ngIf="this.registerForm.get('postal').invalid" style="color: red;">&nbsp;Este campo es obligatorio</mat-hint>
+      </mat-form-field>
+
+
+      <mat-form-field
+        class="chips"
+        appearance="standard"
+        class="formItem"
+        style="text-align: center"
+      >
+        <mat-label class="matLabProf">Profesión(es)</mat-label>
+        <mat-chip-list #chipList aria-label="Profesion">
+          <mat-chip
+            *ngFor="let fruta of frutas"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(fruta)"
+            >{{ fruta.name
+            }}<mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            formControlName="profes"
+            matInput
+            placeholder="profesiones{p.ej. Ingeniero, Dentista, Doctor}"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
+            required
+          />
+        </mat-chip-list>
+        <mat-hint *ngIf="this.registerForm.get('nombre').invalid" style="color: red;">&nbsp;Este campo es obligatorio</mat-hint>
+      </mat-form-field>
+
+
+    </p>
+
+    <div class="card-body">
+      <div class="habilidades" style="margin: auto; display: block; width: 200px; padding-left: 25px; padding-right: 20px;">
+        <br>
+        <label style="color: rgb(0, 0, 0)">Seleccione 3 de sus habilidades</label>
+        <hr>
+        <mat-list
+          class="example-section"
+          *ngFor="let t of habilidades"
+          style="color: rgb(0, 0, 0); "
+        >
+          <mat-checkbox
+            color="primary"
+            class="example-margin"
+            formControlName="checked"
+            (change)="onChange(t)"
+            [disabled]="t.checkeable"
+            >{{ t.nombre }}
+          </mat-checkbox>
+        </mat-list>
+        <br>
+      </div>
+    </div>
+    <p>
+
+
+      <mat-form-field appearance="standard" class="formItem descrip" >
+        <mat-label>Descripción</mat-label>
+        <textarea
+          name="textDesc"
+          id=""
+          cols="10"
+          rows="1"
+          class="textDesc"
+          formControlName="descript"
+          matInput
+          placeholder="Detalles importantes"
+          maxlength="500"
+          (keyup)="conteo()"
+          required
+        >
+        </textarea>
+        <mat-hint>{{caracteres}} caracteres restantes</mat-hint>
+        <mat-hint *ngIf="this.registerForm.get('descript').invalid" style="color: red;">. Este campo es obligatorio</mat-hint>
+      </mat-form-field>
+    </p>
+
+
+
+    <div class="btnRegister" id="dialog-component.html" >
+      <button
+        mat-button
+        class="botonRegis"
+        type="submit"
+        [disabled]="registerForm.invalid"
+      >
+        <mat-icon class="loginIcon">login</mat-icon><span> Registrarme</span>
+      </button>
+    </div>
+  </form>
+</div>

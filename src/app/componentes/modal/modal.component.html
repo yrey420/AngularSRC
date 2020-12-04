@@ -1,0 +1,311 @@
+      <mat-dialog-content class="dialog-content">
+          <div class="container">
+              <form [formGroup]="perfilForm" (ngSubmit)="onRegister()" class="formxD">
+                <h1 style="color: Black; text-align: center; margin-top: 20px">
+                  EDITANDO MI PERFIL
+                </h1>
+
+                <div class="card-body">
+                <!-- <ng-div class="contImg" *ngIf="urlImage | async;else select"> src="{{urlimg}} | async" -->
+                  <div class="contImg" *ngIf="filePath; else select">
+                    <img class="profPic"
+                    src="https://img2.freepng.es/20180330/zoq/kisspng-computer-icons-three-dimensional-space-check-mark-green-tick-5abe6e5977a841.0874474515224295294901.jpg"
+                    alt="unabProfile"
+                    style="width: 100px; height: 80px;">
+                    <div class="container-input-file">
+                      <label class="custom-file">
+                        <input style="text-align: center;" type="file"
+                        accept=".png, .jpg, .jepg"
+                        (change)="onUploadFoto($event)">
+                        <mat-icon class="loginIcon" style="cursor: pointer;">cloud_upload</mat-icon>
+                        <span style="cursor: pointer;">&nbsp;CAMBIAR IMAGEN</span>
+                      </label>
+                    </div>
+
+                  </div>
+                  <ng-template  #select>
+                    <div class="contImg">
+                    <img class="profPic"
+                    src="{{urlimg}} | async "
+                    alt="unabProfile"
+                    style="width: 100px; height: 100px;">
+                    <div class="container-input-file">
+                      <label class="custom-file">
+                        <input style="text-align: center;" type="file"
+                        accept=".png, .jpg, .jepg"
+                        (change)="onUploadFoto($event)">
+                        <mat-icon class="loginIcon" style="cursor: pointer;">cloud_upload</mat-icon>
+                        <span style="cursor: pointer;">&nbsp;CAMBIAR IMAGEN</span>
+                      </label>
+                    </div>
+
+                  </div>
+                  </ng-template>
+                    <input  #imageuser  style="text-align: center;" type="hidden" [value]="urlImage | async">
+
+                    <div class="cont1">
+
+                    <mat-form-field
+                      appearance="outline"
+                      style="text-align: center"
+                      class="formItem">
+                      <label class="label">Nombre</label>
+
+
+                      <input
+                        formControlName="nombre"
+                        type="text"
+                        matInput
+                        placeholder="Nombre{p.ej. Juan, José, Maria}"
+                        required
+                      />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="formItem">
+                      <label class="label">Apellido</label>
+
+                      <input
+                        formControlName="apellido"
+                        type="text"
+                        matInput
+                        placeholder="{p.ej. Rey, Reyes, Zapata}"
+                        required
+                        value="{{users?.apellidos}}"
+                      />
+                    </mat-form-field>
+
+                  <p>
+
+                    <mat-form-field appearance="outline" class="formItem">
+                      <label class="label">Cédula de ciudadanía</label>
+
+                      <input
+                        formControlName="cc"
+                        class="numberCc"
+                        type="number"
+                        matInput
+                        placeholder="Cedula{p.ej. 1098457869}"
+                        required
+                        (change)="validarCC()"
+                      />
+                    </mat-form-field>
+
+
+                    <mat-form-field
+                      appearance="outline"
+                      class="formItem"
+                      style="text-align: center"
+                    >
+                    <label class="label">Correo Electrónico</label>
+                      <input
+                        formControlName="email"
+                        type="email"
+                        matInput
+                        placeholder="email personxx@hotmail.com"
+                        required
+                        (change)="validarMail()"
+                      />
+                    </mat-form-field>
+                  </p>
+
+                  <p>
+
+                    <mat-form-field appearance="outline" class="formItem">
+                      <label class="label">Fecha de nacimiento</label>
+                      <input
+                        name="date"
+                        matInput
+                        [matDatepicker]="picker"
+                        formControlName="fechaN"
+                        required
+                      />
+                      <mat-datepicker-toggle
+                        matSuffix
+                        [for]="picker"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="outline" class="formItem">
+                      <label class="label">Dirección</label>
+                      <input
+                        formControlName="direccion"
+                        type="text"
+                        matInput
+                        placeholder="Dirección{cra 3 # 12-68}"
+                        required
+                      />
+                    </mat-form-field>
+                  </p>
+                  <p>
+
+                    <mat-form-field appearance="outline" class="formItem">
+                      <label class="label">Ciudad</label>
+
+                      <input
+                        formControlName="ciudad"
+                        type="text"
+                        matInput
+                        placeholder="Ciudad {Bucaramanga, Bogotá, Lima}"
+                        [matAutocomplete]="autoC"
+                        required
+                      />
+                      <mat-autocomplete #autoC="matAutocomplete">
+                        <mat-option *ngFor="let option of opcionesFiltradasCiudad | async" [value]="option.municipio">
+                          {{option.municipio}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="outline" class="formItem">
+                      <label class="label">Departamento</label>
+
+                      <input
+                        formControlName="dept"
+                        type="text"
+                        matInput
+                        placeholder="Departamento {Santander, Cundinamarca}"
+                        [matAutocomplete]="autoD"
+                        required
+                      />
+                      <mat-autocomplete #autoD="matAutocomplete">
+                        <mat-option *ngFor="let option of opcionesFiltradas | async" [value]="option.departamento">
+                          {{option.departamento}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </p>
+
+                  <p>
+
+                    <mat-form-field appearance="outline" class="formItem">
+                      <label class="label">País</label>
+                      <input
+                        formControlName="pais"
+                        type="text"
+                        matInput
+                        placeholder="País {Indonesia, Colombia}"
+                        required
+                      />
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="outline" class="formItem">
+                      <label class="label">Número Postal</label>
+
+                      <input
+                        formControlName="postal"
+                        type="number"
+                        matInput
+                        placeholder="Postal{p.ej. 13425}"
+                        required
+                      />
+                    </mat-form-field>
+                  </p>
+
+                  <mat-form-field
+                  class="chips"
+                  appearance="standard"
+                  class="formItem"
+                  style="text-align: center"
+                >
+                <label class="matLabProf">Profesión(es)</label>
+
+                  <mat-chip-list #chipList aria-label="Profesion">
+                    <mat-chip
+                      *ngFor="let fruta of frutas"
+                      [selectable]="selectable"
+                      [removable]="removable"
+                      (removed)="remove(fruta)"
+                      >{{ fruta.name
+                      }}<mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input
+                      matInput
+                      placeholder="profesiones{p.ej. Ingeniero, Dentista, Doctor}"
+                      [matChipInputFor]="chipList"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      [matChipInputAddOnBlur]="addOnBlur"
+                      (matChipInputTokenEnd)="add($event)"
+                      required
+                    />
+                  </mat-chip-list>
+                </mat-form-field>
+
+
+                  <div class="card-body">
+                    <div
+                      class="habilidades"
+                      >
+                      <br />
+                      <label style="color: rgb(0, 0, 0)"
+                        >Seleccione 3 de sus habilidades</label
+                      >
+                      <hr />
+                      <mat-list
+                        class="example-section"
+                        *ngFor="let t of habilidades "
+                        style="color: rgb(0, 0, 0)"
+                      >
+                        <mat-checkbox
+                          color="primary"
+                          class="example-margin"
+                          (change)="onChange(t, $event)"
+                          [disabled]="t.checkeable"
+                          [checked]="t.checked"
+                          >{{ t.nombre }}
+                        </mat-checkbox>
+                      </mat-list>
+                      <br />
+                    </div>
+                  </div>
+
+                  <p>
+
+
+                    <mat-form-field appearance="outline" class="formItem">
+                      <label style="color: rgb(185, 185, 185);">Descripción</label>
+
+                      <textarea
+                        name="textDesc"
+                        id=""
+                        cols="10"
+                        rows="1"
+                        class="textDesc"
+                        formControlName="descript"
+                        matInput
+                        placeholder="Detalles importantes"
+                        maxlength="500"
+                        required
+                      >
+                      </textarea>
+                    </mat-form-field>
+                  </p>
+
+                  <div class="btnRegister" >
+                    <button
+                      mat-button
+                      class="botonRegis"
+                      type="submit"
+                      [disabled]="perfilForm.invalid"
+                      (click)="onRegister()"
+                    >
+                      <mat-icon class="loginIcon">login</mat-icon><span> Guardar cambios</span>
+                    </button>
+                    <button
+                    mat-button
+                    class="botonCancel"
+                    type="button"
+                    (click)="onCancel()"
+                  >
+                    <mat-icon class="loginIcon">login</mat-icon><span> Descartar cambios</span>
+                  </button>
+                  </div>
+                </div>
+              </div>
+              </form>
+            </div>
+
+      </mat-dialog-content>

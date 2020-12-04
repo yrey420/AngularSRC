@@ -1,0 +1,142 @@
+
+// Colors
+$greenSeaweed: rgb(255, 14, 14);
+$blueQueen: rgba(69, 105, 144, 1);
+$redFire: rgba(244, 91, 105, 1);
+
+// Fonts
+$fontAsap: 'Asap', sans-serif;
+
+body {
+//background-image: url(https://i.ytimg.com/vi/Q3IpUFB2SZY/maxresdefault.jpg);
+background-image: url(https://territorioinformativo.com/wp-content/uploads/2017/01/marvel-heroes-videojuego_Territorio-Informativo.jpg);
+background-size: 100vw 100vh;
+//background-position: center;
+//background-size: cover;
+//background-repeat: no-repeat;
+  background-color: $redFire;
+  font-family: $fontAsap;
+  height: 100vh;
+}
+
+.container {
+  overflow: hidden;
+  background-color: white;
+  padding: 40px 30px 30px 30px;
+  border-radius: 10px;
+  border-width: 10px;
+  border-color: rgb(255, 115, 0);
+  position: relative;
+  text-align: center;
+  left: 35%;
+  color: black;
+  top: 40%;
+  width: 300px;
+  background: rgba(255, 255, 255, 0.884);
+}
+
+.login{
+
+  box-shadow: 5px 10px 10px rgb(255, 115, 0.2);
+
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 600px;
+    border-top-left-radius: 40%;
+    border-top-right-radius: 45%;
+    border-bottom-left-radius: 35%;
+    border-bottom-right-radius: 40%;
+    z-index: -1;
+  }
+
+  &::before {
+    left: 40%;
+    bottom: -130%;
+    background-color: rgba($blueQueen, 0.15);
+  }
+
+  &::after {
+    left: 35%;
+    bottom: -125%;
+    background-color: rgba($greenSeaweed, 0.2);
+  }
+
+  > input {
+    font-family: $fontAsap;
+    display: block;
+    border-radius: 5px;
+    font-size: 16px;
+    background: rgb(255, 255, 255);
+    width: 90%;
+    border: 0;
+    padding: 10px 10px;
+    margin: 15px -10px;
+    color: rgb(0, 0, 0);
+  }
+
+  > button {
+    font-family: $fontAsap;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+    width: 50%;
+    border: 0;
+    padding: 10px 0;
+    margin-top: 10px;
+    margin-left: -5px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background-color: gray;
+
+
+    &:hover {
+      background-color: lighten(rgb(255, 102, 0), 10%);
+      color: rgba($color: #000000, $alpha: 1.0);
+    }
+  }
+}
+
+
+a {
+  text-decoration: none;
+  color: rgba(white, 0.6);
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 12px;
+}
+@media screen and (max-width: 504px){
+
+    .container{
+      top: 35%;
+      padding: 10px 9px 9px 9px;
+      left: 0%;
+      margin: auto;
+      max-width: 100%;
+      height: auto;
+
+    }
+    body{
+      background-image: url(https://wallpapersite.com/images/wallpapers/avengers-infinity-war-2560x1440-4k-8k-13270.jpg);
+      background-position: center;
+      background-size: auto 100vh;
+
+    }
+}
+@media screen and (max-width: 800px) and (min-width: 505px){
+
+  .container{
+    top: 35%;
+
+    left: 30%;
+    max-width: 50vw;
+  }
+  body{
+    background-image: url(https://wallpapersite.com/images/wallpapers/avengers-infinity-war-2560x1440-4k-8k-13270.jpg);
+
+  }
+}

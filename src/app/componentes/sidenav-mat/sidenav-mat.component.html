@@ -1,0 +1,85 @@
+
+
+      <!--Este es el contenedor de todo el sidebar-->
+      <mat-sidenav-container class="container"  (backdropClick)='close()'>
+
+        <!-- este sidenav es el menú lateral que se desplegará haciendo click en la hamburguesa como un evento-->
+
+          <mat-sidenav class="sidenav" #sidenav mode="over">
+            <div class="sideItems menuHeader2">
+              <!--<button mat-icon-button class="btnMenu" aria-label="icon-button menu icon" (click)="sidenav.toggle()">-->
+                <button mat-icon-button class="" aria-label="icon-button menu icon" [routerLink]="['/home']">
+                <img src="../../../assets/LOGO.png" alt="LOGO" class="logo" style="width: 80px;height: 40px;" >
+              </button>
+              <div class="user" *ngIf="user$ | async as user; else nouser"></div>
+              <ng-template #nouser>
+              <a class="nav-link active" [routerLink]="['/registro']"><mat-icon class="matIcon">person_add</mat-icon>Registrarse</a>
+              <br>
+              <a class="nav-link active" [routerLink]="['/login']"><mat-icon class="matIcon">login</mat-icon>Iniciar Sesión</a>
+              <br>
+              </ng-template>
+              <a *ngIf="user$ | async as user" class="nav-link active" [routerLink]="['/records']"><mat-icon class="matIcon"> list</mat-icon>Registros</a>
+              <br>
+              <a class="nav-link active" [routerLink]="['/video']"><mat-icon class="matIcon">ondemand_video</mat-icon>Video</a>
+              <br>
+              <a *ngIf="user$ | async as user" class="nav-link active" [routerLink]="['/miperfil']"><mat-icon class="matIcon">account_circle</mat-icon>Mi perfil </a>
+              <br>
+              <a *ngIf="user$ | async as user" class="nav-link active" (click)=salir() [routerLink]="['/login']"><mat-icon class="matIcon">android</mat-icon>Salir</a>
+
+            </div>
+          </mat-sidenav>
+
+          <mat-sidenav #menuIcon class="sidenav" position="end">
+
+            <div class="menuHeader2" style=" width: 100%; height: fit-content;"  >
+              <a class="menuIt" class="nav-link active" [routerLink]="['/home']"><mat-icon class="matIcon">home</mat-icon> <span class="label">Inicio</span> </a>
+              <br>
+              <a class="menuIt" class="nav-link active" [routerLink]="['/equipo']"><mat-icon class="matIcon">group</mat-icon><span class="label">Equipo</span></a>
+              <br>
+              <a class="menuIt" class="nav-link active" [routerLink]="['/contactanos']"><mat-icon class="matIcon">contact_mail</mat-icon><span class="label">Contacto</span></a>
+            </div>
+
+          </mat-sidenav>
+
+          <mat-sidenav-content class="total">
+
+              <!--este es el toolbar, con los iconos y textos-->
+              <mat-toolbar id="navbar" class="navbar">
+
+                <mat-icon mat-icon-button class="btnMenu" (click)="sidenav.toggle()">menu</mat-icon>
+                <mat-icon mat-icon-button class="btnMenu2" (click)="menuIcon.toggle()">menu</mat-icon>
+                <div class="cont" style="width: max-content;">
+                <button mat-icon-button class="" aria-label="icon-button menu icon" (click)="sidenav.toggle()">
+                  <img src="../../../assets/LOGO.png" alt="LOGO" style="width: 80px;height: 40px;" class="logo2">
+                </button>
+                </div>
+
+                <div class="menuHeader" style=" width: 100%; height: fit-content;"  >
+                  <a class="menuIt" class="nav-link active" [routerLink]="['/home']"><span class="label">Inicio</span> </a>
+                  <a class="menuIt" class="nav-link active" [routerLink]="['/equipo']"><span class="label">Equipo</span></a>
+                  <a class="menuIt" class="nav-link active" [routerLink]="['/contactanos']"><span class="label">Contacto</span></a>
+                </div>
+
+
+
+                </mat-toolbar>
+
+
+
+
+                <mat-sidenav-content class="content">
+
+          <router-outlet>   </router-outlet>
+
+
+
+
+          </mat-sidenav-content>
+          <mat-sidenav-content style="height: 20px; overflow: hidden;">
+            <app-footer></app-footer>
+          </mat-sidenav-content>
+
+          </mat-sidenav-content>
+
+        </mat-sidenav-container>
+

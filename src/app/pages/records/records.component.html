@@ -1,0 +1,37 @@
+
+      <div class="container">
+      <table class="table">
+        <tr>
+          <th>Nombre</th>
+          <th>Apellidos</th>
+          <th>Cedula de Ciudadania</th>
+          <th>Email</th>
+          <th>Fecha Nacimiento</th>
+          <th>Direccion</th>
+          <th>Departamento</th>
+          <th>Ciudad</th>
+          <th>País</th>
+          <th>Postal</th>
+          <th>Profesion</th>
+          <th>Habilidades</th>
+          <th>Descripcion</th>
+        </tr>
+        <tr *ngFor="let user of usuarios">
+          <td>{{ user.nombres }}</td>
+          <td>{{ user.apellidos }}</td>
+          <td>{{ user.cc }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.fecha['seconds'] * 1000 | date: "dd/MM/yyyy" }}</td>
+          <!--Acá tira un error permanente
+            , sin embargo .seconds*1000 es necesaria para transformar el time stamp en tipo date -->
+          <td>{{ user.direccion }}</td>
+          <td>{{ user.departamento }}</td>
+          <td>{{ user.ciudad }}</td>
+          <td>{{ user.pais }}</td>
+          <td>{{ user.codigo_postal }}</td>
+          <td>{{ user.profesion }}</td>
+          <td>{{ user.habilidades }}</td>
+          <td>{{ user.descripcion }}</td>
+        </tr>
+      </table>
+      </div>

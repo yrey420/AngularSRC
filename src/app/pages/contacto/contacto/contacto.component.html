@@ -1,0 +1,101 @@
+<div class="container">
+<div class="column">  
+    <form [formGroup]="contactanosForm" (ngSubmit)="guardar()" method="POST" class="formxD"> 
+        <p>
+        <mat-form-field
+        appearance="outline"
+        style="text-align: center"
+        class="formItem">
+        <label class="label">Nombre</label>
+        <input
+          formControlName="nombre"
+          type="text"
+          matInput
+          placeholder="Tu nombre completo"
+          required
+        />
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field
+      appearance="outline"
+      style="text-align: center"
+      class="formItem">
+      <label class="label">Correo electronico</label>
+      <input
+        formControlName="email"
+        type="text"
+        matInput
+        placeholder="Tu correo electronico"
+        required
+        (change)=change();
+      />
+      <mat-error *ngIf="contactanosForm.get('email').hasError('pattern') && !contactanosForm.get('email').hasError('required')">
+        Por favor digita un correo electronico valido
+      </mat-error>
+      <mat-error *ngIf="contactanosForm.get('email').hasError('required')">
+        El email es <strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+</p>
+<p>
+    <mat-form-field
+    appearance="outline"
+    class="formItem"
+    style="text-align: center"
+  >
+    <mat-label class="titulo">Motivo</mat-label>
+    <br>
+    <mat-form-field
+    style="text-align: center;width: 90%;"
+  >
+    <mat-label>Tu motivo</mat-label>
+    <mat-select
+    formControlName="motivo"
+    matInput
+    required>
+      <mat-option [disabled]="true">Seleccionar</mat-option>
+      <mat-option *ngFor="let motivo of motivos" [value]="motivo">{{motivo}}</mat-option>
+    </mat-select>
+    <mat-hint></mat-hint>
+  </mat-form-field>
+</mat-form-field>
+</p>
+<br>
+<br>
+<p>
+    <mat-form-field appearance="outline" style="text-align: center;" class="formItem">
+        <mat-label class="titulo">Mensaje</mat-label>
+  <mat-form-field  style="width: 90%;">
+    <mat-label>Tu mensaje</mat-label>
+    <textarea
+      name="mensaje"      
+      class="textDesc"
+      formControlName="mensaje"
+      matInput
+      placeholder="Tu mensaje"      
+      required
+    >
+    </textarea>
+  </mat-form-field>
+    </mat-form-field>
+</p>  
+
+<div class="btnRegister"  >
+    <button
+      mat-button
+      class="botonRegis"
+      type="submit"
+      [disabled]="contactanosForm.invalid"
+    >
+      <mat-icon class="loginIcon">send</mat-icon><span> Enviar</span>
+    </button>
+  </div>
+
+</form>
+</div>
+<div class="column">
+    <img src="../../../../assets/CONTACTO.png" class="imagen">
+</div>
+</div>

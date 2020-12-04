@@ -1,0 +1,44 @@
+      table, th, td {
+        border: 1px solid gray;
+        border-collapse: collapse;
+        padding: 6px 6px 6px 6px 28px ;
+      }
+      th, td {
+        padding: 15px;
+      }
+      td{
+        letter-spacing: 1px;
+      }
+      th {
+        text-align: center;
+        letter-spacing: 2px;
+      }
+
+      .container{
+        overflow-x: auto;
+      }
+
+      .table{
+        text-align: center;
+        background: linear-gradient(#f8bd6f,#EED7B0);
+        border-radius: 10px;
+        width: 100%;
+        border-collapse: collapse;
+        border: 3px solid gray;
+
+        font-size:16px solid;
+
+      }
+
+
+      @media only screen and (max-width: 760px),
+      (min-device-width: 768px) and (max-device-width: 1024px){
+
+        table, thead, tbody, th, td, tr {
+          position: relative;
+          max-width: auto;
+          max-height: auto;
+        }
+
+
+      }

@@ -1,0 +1,255 @@
+<div class="container">
+  <form [formGroup]="perfilForm" class="formxD">
+    <h1 style="color: Black; text-align: center; margin-top: 20px">
+      PERFIL DE USUARIO
+    </h1>
+
+    <div class="card-body">
+      <div class="contImg">
+        <img class="profPic"
+        src="{{imgurl}} | async"
+        alt="unabProfile">
+      </div>
+        <div class="cont1">
+          <label class="label">Nombre:</label>
+          <mat-form-field
+          appearance="outline"
+          style="text-align: center"
+          class="formItem">
+          <input
+            formControlName="nombre"
+            type="text"
+            matInput
+            placeholder="Nombre{p.ej. Juan, José, Maria}"
+            required
+          />
+        </mat-form-field>
+
+
+        <label class="label2">Apellidos:</label>
+        <mat-form-field
+        appearance="outline"
+        class="formItem">
+
+
+          <input
+            formControlName="apellido"
+            type="text"
+            matInput
+            placeholder="{p.ej. Rey, Reyes, Zapata}"
+            required
+            value="{{users?.apellidos}}"
+          />
+        </mat-form-field>
+
+
+      <p>
+        <label class="label">Número de cédula:</label>
+        <mat-form-field appearance="outline" class="formItem">
+          <input
+            formControlName="cc"
+            class="numberCc"
+            type="number"
+            matInput
+            placeholder="Cedula{p.ej. 1098457869}"
+            required
+
+          />
+        </mat-form-field>
+
+        <label class="label2">Correo Electrónico:</label>
+        <mat-form-field
+          appearance="outline"
+          class="formItem"
+          style="text-align: center"
+        >
+          <input
+            formControlName="email"
+            type="email"
+            matInput
+            placeholder="email {p.ej.  personxx@hotmail.com}"
+            required
+
+          />
+        </mat-form-field>
+      </p>
+
+      <p>
+        <label class="label">Fecha de nacimiento:</label>
+        <mat-form-field appearance="outline" class="formItem">
+          <input
+            matInput
+            formControlName="fechaN"
+            required
+            placeholder= "Fecha {p.ej. 30 / 12 / 2020}"
+          />
+       <!-- <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>-->
+        </mat-form-field>
+
+        <label class="label2">Dirección:</label>
+        <mat-form-field appearance="outline" class="formItem">
+          <input
+            formControlName="direccion"
+            type="text"
+            matInput
+            placeholder="Dirección{cra 3 # 12-68}"
+            required
+          />
+        </mat-form-field>
+      </p>
+      <p>
+        <label class="label">Ciudad:</label>
+        <mat-form-field appearance="outline" class="formItem">
+          <input
+            formControlName="ciudad"
+            type="text"
+            matInput
+            placeholder="Ciudad {Bucaramanga, Bogotá, Lima}"
+            required
+          />
+        </mat-form-field>
+
+        <label class="label2">Departamento:</label>
+        <mat-form-field appearance="outline" class="formItem">
+          <input
+            formControlName="dept"
+            type="text"
+            matInput
+            placeholder="Departamento {Santander, Cundinamarca}"
+            required
+          />
+        </mat-form-field>
+      </p>
+
+      <p>
+        <label class="label">País:</label>
+        <mat-form-field appearance="outline" class="formItem">
+          <input
+            formControlName="pais"
+            type="text"
+            matInput
+            placeholder="País {Indonesia, Colombia}"
+            required
+          />
+        </mat-form-field>
+
+        <label class="label2">Código Postal:</label>
+        <mat-form-field appearance="outline" class="formItem">
+          <input
+            formControlName="postal"
+            type="number"
+            matInput
+            placeholder="Postal{p.ej. 13425}"
+            required
+          />
+        </mat-form-field>
+      </p>
+      <label
+          >Profesiones:</label>
+
+      <div class="card-body">
+        <div
+          class="profesiones"
+          style="
+            margin: auto;
+            display: block;
+            width: 200px;
+            padding-left: 25px;
+            padding-right: 20px;
+          "
+        >
+          <br />
+          <mat-list
+            class="example-section"
+            *ngFor="let p of profesiones"
+            style="color: rgb(172, 172, 172)"
+          >
+          <mat-list-item
+          color="primary"
+          class="example-margin"        
+          >{{ p }}
+        </mat-list-item>
+
+          </mat-list>
+          <br />
+        </div>
+      </div>
+
+
+      <label>
+      Habilidades:
+      </label>
+      <div class="card-body">
+        <div
+          class="habilidades"
+          style="
+            margin: auto;
+            display: block;
+            width: 200px;
+            padding-left: 25px;
+            padding-right: 20px;
+          ">
+          <br />
+          <mat-list
+            class="example-section"
+            *ngFor="let h of habilidades"
+            style="color: rgb(172, 172, 172)"
+          >
+          <mat-list-item
+          color="primary"
+          class="example-margin"
+          >{{ h }}
+        </mat-list-item>
+
+          <!--
+          <mat-checkbox
+          color="primary"
+          class="example-margin"
+          formControlName="checked"
+          >{{ t }}
+        </mat-checkbox>
+        -->
+
+          </mat-list>
+          <br />
+        </div>
+      </div>
+
+      <p>
+        <legend>Descripción:</legend>
+        <mat-form-field appearance="outline" class="formItem">
+          <mat-label></mat-label>
+          <textarea
+            name="textDesc"
+            id=""
+            cols="10"
+            rows="1"
+            class="textDesc"
+            formControlName="descript"
+            matInput
+            placeholder="Detalles importantes"
+            maxlength="500"
+            required
+          >
+          </textarea>
+        </mat-form-field>
+      </p>
+
+      <div class="btnRegister" >
+        <button
+          mat-button
+          class="botonRegis"
+          type="submit"
+          (click)="onRegister()"
+        >
+          <mat-icon class="loginIcon">login</mat-icon><span> Editar</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>

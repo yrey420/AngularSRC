@@ -1,0 +1,13 @@
+<ng-container *ngIf="user | async; else login">
+  Estas logueado con {{user.email}}
+</ng-container>
+<ng-template #login>
+<body>
+<div class="container">
+    <form class="login" [formGroup]="loginForm">
+    <input type="text" placeholder="Ingresa tu email"   formControlName="email">
+    <button type="submit" (click)="onSignIn()" >Iniciar Sesión</button>
+  </form>
+</div>  
+</body>
+</ng-template>
